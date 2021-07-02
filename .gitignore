@@ -5,6 +5,10 @@ __pycache__/
 
 # C extensions
 *.so
+# data folder
+data/
+chromedriver
+securimage_show.png
 
 # Distribution / packaging
 .Python
