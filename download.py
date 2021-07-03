@@ -146,7 +146,11 @@ def run(district, subcourt):
                    # "safebrowsing.enabled": True,
                    "download.extensions_to_open": "applications/pdf"}
         options.add_experimental_option("prefs", profile)
-        # chrome_options.add_argument("--mute-audio")
+        options.add_argument("--mute-audio")
+        options.add_argument("--headless")
+        options.add_argument("--disable-gpu")
+        options.add_argument("--no-sandbox")
+        options.add_argument("--window-size = 1400, 2100")
         driver = webdriver.Chrome("./chromedriver", options=options)
         driver.maximize_window()
         wait = WebDriverWait(driver, 25)
@@ -244,14 +248,22 @@ def run(district, subcourt):
                                     url2 = (tds[3].find_element_by_css_selector(
                                         'a')).get_attribute("href")
                                 except:
-                                    continue
+                                    try:
+                                        srlist.append(tds[0].text)
+                                        typeList.append(tds[1].text)
+                                        orderDateList.append(tds[2].text)
+                                        oList.append(tds[3].text)
+                                        oNumberList.append(f"No file.")
+                                        continue
+                                    except:
+                                        continue
                                 srlist.append(tds[0].text)
                                 typeList.append(tds[1].text)
                                 orderDateList.append(tds[2].text)
                                 oList.append(tds[3].text)
                                 session = get_request_session(driver)
                                 r = session.get(url2, stream=True)
-                                chunk_size = 40000
+                                chunk_size = 1024*1024
                                 new_name = (str(tds[1].text).replace(
                                     "/", "_")).replace(".", "_")+str(tds[2].text)+".pdf"
                                 with open(f"{save_dir}{new_name}", 'wb') as file:
