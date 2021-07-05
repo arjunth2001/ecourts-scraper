@@ -7,7 +7,8 @@ __pycache__/
 *.so
 # data folder
 data/
-chromedriver
+chromedriver*
+log
 securimage_show.png
 
 # Distribution / packaging
@@ -117,7 +118,7 @@ venv.bak/
 # Spyder project settings
 .spyderproject
 .spyproject
-
+*.png
 # Rope project settings
 .ropeproject
 

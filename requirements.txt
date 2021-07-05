@@ -1,9 +1,10 @@
-selenium==3.10.0
 requests==2.25.1
 pytesseract==0.3.8
 pynput==1.7.3
+selenium==3.10.0
 opencv_python==4.5.2.54
 numpy==1.21.0
 pandas==1.2.5
+PyVirtualDisplay==2.2
 beautifulsoup4==4.9.3
 Pillow==8.3.0

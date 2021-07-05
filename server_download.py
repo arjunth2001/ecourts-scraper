@@ -24,8 +24,8 @@ from pynput.keyboard import Key, Controller
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from pyvirtualdisplay import Display
 url = "https://districts.ecourts.gov.in/agra"  # base url
-# Take small runs.. Can create timeouts due to captcha... depends on network speed and chunksize variable..
 print(sys.argv)
 from_date = sys.argv[1]
 # Take small runs.. Can take timeouts due to captcha...
@@ -34,7 +34,7 @@ s_d = int(sys.argv[3])  # Start index of districts...
 e_d = int(sys.argv[4])  # End index of districts...
 IMAGE = sys.argv[5]
 # base directory for outputs
-base_dir = '/Users/arjunth/Documents/ecourts/ecourts-scraper/data/'
+base_dir = './data/'
 # Thanks to Stackoverflow... https://stackoverflow.com/questions/46026983/how-to-download-the-pdf-by-using-selenium-module-firefox-in-python-3#:~:text=import%20os%2C%20time%20from%20selenium,download
 
 
@@ -149,10 +149,10 @@ def run(district, subcourt):
                    "download.extensions_to_open": "applications/pdf"}
         options.add_experimental_option("prefs", profile)
         options.add_argument("--mute-audio")
-        options.add_argument("--headless")
-        options.add_argument("--disable-gpu")
-        options.add_argument("--no-sandbox")
-        options.add_argument("--window-size = 1400, 2100")
+        # options.add_argument("--headless")
+        # options.add_argument("--disable-gpu")
+        # options.add_argument("--no-sandbox")
+        # options.add_argument("--window-size = 1400, 2100")
         driver = webdriver.Chrome("./chromedriver", options=options)
         driver.maximize_window()
         wait = WebDriverWait(driver, 25)
@@ -309,4 +309,7 @@ def main():
 
 
 if __name__ == "__main__":
+    display = Display(visible=0, size=(1400, 2100))
+    display.start()
     main()
+    display.stop()
